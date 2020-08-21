@@ -612,4 +612,4 @@ E assim por diante, então se fizermos um loop infinito, a `Stack` vai crescer i
 ## Conclusão
 Os exemplos de aplicação mostrados aqui parecem triviais, todas as funções descritas podem ser transformadas em soluções iterativas, e isso pode ser desmotivante para estudar esses algorítmos, porém, mantenha em mente que essa é a introdução, recursividade é muito importante para algorítmos de ordenação como TimSort e Quicksort, assim como para algorítmos de busca como DFS, balancear árvores, dentre outros usos.
 
-[boneca_ultrassom](https://i.pinimg.com/originals/88/c4/03/88c40377ce84c6b95f6485ab186be4e0.jpg)
+![boneca_ultrassom](https://i.pinimg.com/originals/88/c4/03/88c40377ce84c6b95f6485ab186be4e0.jpg)
