@@ -22,7 +22,12 @@ Recursão é um tema extremamente importante para nosso estudo de algorítmos, a
 
 Um breve exemplo de uso cotidiano da recursão: copiar uma pasta no Windows ou Linux, imagine que para cada pasta que passamos para nossa função de copiar, precisamos antes verificar se dentro dela há alguma outra pasta, e assim por diante, até que todas as pastas (que estavam dentro da inicial) tenham sido copiadas.
 
+A recursão divide o problema original em pedaços e utiliza o método "_divide and conquer_" ("_dividir e conquistar_") para solucioná-lo.
+
+Enquanto divide em pedaços menores, a recursão converge até um _caso base_, que seria o ponto de parada.
+
 ## O que é recursão?
+
 A recursão ocorre quando uma função (subrotina) chama a si mesma, veja o código genérico abaixo:
 ```c
 void funcao_recursiva(...)
@@ -52,7 +57,7 @@ Quando estamos utilizando recursão com números, é comum que vamos ter um limi
 A recursão causa um loop assim como a iteração (com `for` e `while`), soluções recursivas e iterativas vão ser mais aptas para resolver diferentes tipos de problemas. Vamos entender como funciona o loop e depois implementar funções que calculam fatoriais e números da sequência de Fibonacci usando recursão.
 
 ## Dominando o loop
-Vamos tentar fazer um loop que imprime uma sequência de 4 números usando recursão.
+Vamos fazer um loop que imprima 4 números na tela, e depois ver como seria a solução recursiva para o mesmo problema.
 
 **Saída desejada:**
 > `1` \
@@ -85,14 +90,14 @@ int main()
 }
 ```
 
-**Solução equivalente com função iterativa usando `while (true)`:**
+**Solução equivalente com função iterativa usando `while (true)` ao invés do `for`:**
 ```c
 #include <stdbool.h> // true e false
 
 void imprimir(int i, int limite)
 {
     while (true) {
-        // Condição de parada
+        // Condição de parada, `i` chegou no `limite`
         if (i >= limite) {
             return; // ou break; para sair
         }
@@ -109,14 +114,16 @@ int main()
 }
 ```
 
-_OBS_: Embora a solução acima com `while (true)` seja estranha, é necessário entender seu fluxo para poder entender a solução recursiva abaixo.
+Entender o funcionamento da solução com `while (true)` é muito importante para entender a solução recursiva.
+
+O bloco `while` vai rodar até que chegue em um `return` ou `break`, então ele vai parar, nesse caso será quando `i` atingir o `limite`.
 
 **Solução equivalente recursiva:**
 ```c
 void imprimir_rec(int i, int limite)
 {
     // Condição de parada
-    // Se `i` chegou em `limite`, parar!
+    // `return` se `i` chegou em `limite`
     if (i >= limite) {
         return;
     }
@@ -132,10 +139,12 @@ int main()
 }
 ```
 
-Veja, a nossa solução recursiva recebe `i` e `limite`, assim como as outras soluções, e imprime `i` enquanto ele não chega em `limite`, quando chega, saímos da função e paramos o loop.
+Veja, a função `imprimi_rec` é uma função recursiva que chama a si mesma várias vezes, ela recebe `i` e `limite`, assim como as outras soluções, e imprime `i` enquanto ele não chega em `limite`, quando chega, saímos da função e paramos o loop.
 
-Vamos tracejar a ordem de execução do nosso programa:
-- Função chamada com os argumentos `(1, 5)`.
+A saída do programa é a mesma! A mesma solução escrita de 4 maneiras diferentes.
+
+Para entender o código, vamos tracejar a ordem de execução do nosso programa:
+- Início com argumentos `(1, 5)`.
 - `1 >= 5` == `false`, entrar no `else` e imprimir `1`.
 - Função chamada com os argumentos `(2, 5)`.
 - `2 >= 5` == `false`, entrar no `else` e imprimir `2`.
@@ -144,9 +153,26 @@ Vamos tracejar a ordem de execução do nosso programa:
 - Função chamada com os argumentos `(4, 5)`.
 - `4 >= 5` == `false`, entrar no `else` e imprimir `4`.
 - Função chamada com os argumentos `(5, 5)`.
-- `5 >= 5` == `true`, não chamar mais nada.
+- `5 >= 5` == `true`, entrar no `if` e rodar `return`.
+
+Vamos ver como seria o fluxo se os argumentos na entrada fossem diferentes:
+
+- Início com argumentos `(6, 9)`.
+- `6 >= 9` == `false`, entrar no `else` e imprimir `1`.
+- Função chamada com os argumentos `(6 + 1, 9)`.
+- `7 >= 9` == `false`, entrar no `else` e imprimir `7`.
+- Função chamada com os argumentos `(7 + 1, 9)`.
+- `8 >= 9` == `false`, entrar no `else` e imprimir `8`.
+- Função chamada com os argumentos `(8 + 1, 9)`.
+- `9 >= 9` == `true`, entrar no `if` e rodar `return`.
+
+- Início com argumentos `(100, 101)`.
+- `100 >= 101` == `false`, entrar no `else` e imprimir `100`.
+- Função chamada com os argumentos `(100 + 1, 100)`.
+- `101 >= 101` == `true`, entrar no `if` e rodar `return`.
 
 Se invertermos o `if` da nossa função, deixamos a solução mais parecida com a iterativa com o `for`:
+
 ```c
 void imprimir_rec(int i, int limite)
 {
@@ -586,3 +612,4 @@ E assim por diante, então se fizermos um loop infinito, a `Stack` vai crescer i
 ## Conclusão
 Os exemplos de aplicação mostrados aqui parecem triviais, todas as funções descritas podem ser transformadas em soluções iterativas, e isso pode ser desmotivante para estudar esses algorítmos, porém, mantenha em mente que essa é a introdução, recursividade é muito importante para algorítmos de ordenação como TimSort e Quicksort, assim como para algorítmos de busca como DFS, balancear árvores, dentre outros usos.
 
+[boneca_ultrassom](https://i.pinimg.com/originals/88/c4/03/88c40377ce84c6b95f6485ab186be4e0.jpg)
