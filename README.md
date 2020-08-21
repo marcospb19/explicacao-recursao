@@ -12,7 +12,7 @@
   - [Stack Overflow](#Stack-Overflow)
     - [Como a stack funciona](#Como-a-stack-funciona)
     - [Como acontece?](#Como-acontece)
-
+  - [Conclusão](#Conclusão)
 
 # Introdução à Recursividade
 ## Por quê?
@@ -70,7 +70,7 @@ int main()
 }
 ```
 
-**Solução com função iterativa usando `for`:**
+**Solução equivalente com função iterativa usando `for`:**
 ```c
 void imprimir(int comeco, int limite)
 {
@@ -85,7 +85,7 @@ int main()
 }
 ```
 
-**Solução com função iterativa usando `while (true)`:**
+**Solução equivalente com função iterativa usando `while (true)`:**
 ```c
 #include <stdbool.h> // true e false
 
@@ -94,7 +94,7 @@ void imprimir(int i, int limite)
     while (true) {
         // Condição de parada
         if (i >= limite) {
-            return; // ou break;
+            return; // ou break; para sair
         }
         else {
             printf("%d\n", i);
@@ -109,12 +109,13 @@ int main()
 }
 ```
 
-OBS: Embora a solução acima com `while (true)` seja estranha, é necessário entender seu fluxo para poder entender a solução recursiva abaixo.
+_OBS_: Embora a solução acima com `while (true)` seja estranha, é necessário entender seu fluxo para poder entender a solução recursiva abaixo.
 
-**Solução recursiva:**
+**Solução equivalente recursiva:**
 ```c
 void imprimir_rec(int i, int limite)
 {
+    // Condição de parada
     // Se `i` chegou em `limite`, parar!
     if (i >= limite) {
         return;
@@ -127,7 +128,7 @@ void imprimir_rec(int i, int limite)
 
 int main()
 {
-    imprimir_rec(1, 5);
+    imprimir_rec(1, 5); // Primeira chamada
 }
 ```
 
@@ -270,7 +271,7 @@ Essas bonecas encaixam uma dentro da outra.
 
 ![bonecas_russas2](https://miro.medium.com/max/572/1*e0n2WjlNyS5ua1YTJR3apQ.png)
 
-Portando, caso queiramos acessar a boneca mais interna, precisamos abrir as mais externas na ordem, isso corresponde ao nosso `printf("Começo...");`, depois que abrimos todas as bonecas, para fechar tudo, temos que fechar primeiro a mais interna, e depois seguir fechando até a mais externa, isso corresponde ao nosso `printf("Saída...");`.
+Para acessar a boneca mais interna, precisamos ir abrindo a mais externa até chegar na do centro, isso corresponde ao nosso `printf("Começo...");`, depois que abrimos todas as bonecas, para fechar todas novamente, não podemos pular etapas, temos que fechar as mais internas primeiro, na ordem, isso corresponde ao nosso `printf("Saída...");`.
 
 Desafio:
 1. Coloque ambos `prinft` dentro do `if`, o que muda na saída do programa?
@@ -299,7 +300,7 @@ Sabemos que o fatorial de _1_ e _0_ é igual a _1_, então vamos começar o cód
 ```c
 int fatorial(int n)
 {
-    // Para n == 0 ou n == 1
+    // Equivalente a (n == 0) || (n == 1).
     if (n <= 1) {
         return 1;
     }
@@ -353,6 +354,18 @@ int main()
 
 Feito, obtemos _120_ como resultado.
 
+Podemos remover o `else` ambíguo e inverter o `if`, sem alterar o resultado.
+
+```c
+int fatorial(int n)
+{
+    if (n > 1) {
+        return n * fatorial(n - 1); // Passo recursivo
+    }
+    return 1; // Caso base
+}
+```
+
 Nossa definição recursiva final de fatorial concluiu como:
 > `f(0) = f(1) = 1` \
 > `f(n) = n * f(n - 1)`
@@ -370,7 +383,7 @@ A sequência é definida da seguinte maneira:
 E seus primeiros elementos são:
 > `0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55...`
 
-Acima podemos ver a definição em ação `8 = 5 + 3`, `13 = 8 + 5`, `21 = 13 + 8`... etc..
+Podemos explicar com a definição `f(n) = f(n - 1) + f(n - 2)` , que `8 = 5 + 3`, `13 = 8 + 5`, `21 = 13 + 8`...
 
 Dessa vez temos dois _casos base_, quando `n == 0` e quando `n == 1`, (ou seja `0 <= n <= 1`), podemos então começar a nossa função recursiva, pois já sabemos quando ela deve parar.
 
@@ -486,7 +499,7 @@ Saída:
 # Stack Overflow
 Caso você tenha feito os desafios, especificamente o de loop infinito, você causou um _**core dumped**_, mas por que esse loop infinito não continuou para sempre que nem no `for`?
 
-> OBS: Caso não esteja recebendo o _**core dumped**_ com o código abaixo, certifique-se que não está passando argumentos extras para o compilador que tentam fazer truques e te ajudar.
+> _OBS_: Caso não esteja recebendo o _**core dumped**_ com o código abaixo, certifique-se que não está passando argumentos extras para o compilador que tentam fazer truques e te ajudar.
 
 Exemplo que causa loop infinito e leva ao _**core dumped**_:
 
@@ -563,9 +576,13 @@ void imprimir_rec(int i, int limite)
 
 Para cada chamada de `imprimir_rec`, temos a adição de mais memória na `Stack`:
 
-`Stack: imprimir_rec{16} | i{4} | limite{4}`
-`Stack: imprimir_rec{16} | i{4} | limite{4} | imprimir_rec{16} | i{4} | limite{4} `
-`Stack: imprimir_rec{16} | i{4} | limite{4} | imprimir_rec{16} | i{4} | limite{4} | imprimir_rec{16} | i{4} | limite{4} `
+`Stack: imprimir_rec{16} | i{4} | limite{4}` \
+`Stack: imprimir_rec{16} | i{4} | limite{4} | imprimir_rec{16} | i{4} | limite{4} ` \
+`Stack: imprimir_rec{16} | i{4} | limite{4} | imprimir_rec{16} | i{4} | limite{4} | imprimir_rec{16} | i{4} | limite{4} ` \
 ...
 
 E assim por diante, então se fizermos um loop infinito, a `Stack` vai crescer indefinidamente até que não vai ter mais memória disponível, e então vamos receber um **core dumped**, em outras linguagens a mensagem de erro é mais descritiva, por exemplo, em Javascript: `RangeError: Maximum call stack size exceeded`.
+
+## Conclusão
+Os exemplos de aplicação mostrados aqui parecem triviais, todas as funções descritas podem ser transformadas em soluções iterativas, e isso pode ser desmotivante para estudar esses algorítmos, porém, mantenha em mente que essa é a introdução, recursividade é muito importante para algorítmos de ordenação como TimSort e Quicksort, assim como para algorítmos de busca como DFS, balancear árvores, dentre outros usos.
+
