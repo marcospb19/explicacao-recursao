@@ -553,7 +553,7 @@ int funcao()
     scanf("%d %d %f", &x, &y, &f);
 
     if (x > y) {
-        int soma = x + y;
+        int z = x + y;
         char c;
         ...
     }
@@ -562,21 +562,21 @@ int funcao()
 }
 ```
 
-Quando criamos `x`, `y`, `f`, e `soma`, essas variáveis são adicionadas (empilhadas) na `Stack` da seguinte maneira.
+Quando criamos `x`, `y`, `f`, e `z`, essas variáveis são adicionadas (empilhadas) na `Stack` da seguinte maneira.
 
 `Stack:`
 `Stack: x{4}`
 `Stack: x{4} | y{4}`
 `Stack: x{4} | y{4} | f{8}`
 
-Se `(x > y)`, entramos no `if` que declara a variável chamada `soma`:
+Se `(x > y)`, entramos no `if` que declara a variável chamada `z`:
 
-`Stack: x{4} | y{4} | f{8} | soma{4}`
-`Stack: x{4} | y{4} | f{8} | soma{4} | c{1}`
+`Stack: x{4} | y{4} | f{8} | z{4}`
+`Stack: x{4} | y{4} | f{8} | z{4} | c{1}`
 
 As chaves servem para denotar a quantidade de _bytes_ que cada tipo está consumindo, `int` ocupa _4_ bytes, e `double` ocupa _8_ bytes, vamos ver proporcionalmente o que isso signfica:
 
-`Stack: xxxx|yyyy|ffffffff|soma|c`
+`Stack: xxxx|yyyy|ffffffff|zzzz|c`
 
 Ao atingir o `return`, todas essas variáveis locais morrem, e a `Stack` limpa elas.
 
