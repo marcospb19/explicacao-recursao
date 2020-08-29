@@ -18,7 +18,7 @@
 ## Por quê?
 Mas calma, antes de aprendermos recursão, qual é a nossa motivação?
 
-Recursão é um tema extremamente importante para nosso estudo de algorítmos, a recursão é necessária para uso de diversas estruturas de dados e é comumente utilizada em algorítmos de árvores, grafos, programação dinâmica e melhores algorítmos de ordenação.
+Recursão é um tema extremamente importante para nosso estudo de algoritmos, a recursão é necessária para uso de diversas estruturas de dados e é comumente utilizada em algoritmos de árvores, grafos, programação dinâmica e melhores algoritmos de ordenação.
 
 Um breve exemplo de uso cotidiano da recursão: copiar uma pasta no Windows ou Linux, imagine que para cada pasta que passamos para nossa função de copiar, precisamos antes verificar se dentro dela há alguma outra pasta, e assim por diante, até que todas as pastas (que estavam dentro da inicial) tenham sido copiadas.
 
