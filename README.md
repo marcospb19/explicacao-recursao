@@ -241,7 +241,7 @@ void imprimir_flow(int i)
 {
     printf("Começo da chamada (%d)\n", i);
     if (i >= 1) {
-        imprimir(i - 1); // Passo recursivo
+        imprimir_flow(i - 1); // Passo recursivo
     }
     printf("Saída do (%d)\n", i);
 }
