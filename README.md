@@ -289,11 +289,7 @@ A condição de parada está mais uma vez implícita, vai acontecer quando `!(i 
 
 Isso acontece pois no _passo recursivo_, quando `imprimir_flow(i)` chama `imprimir_flow(i - 1)`, a sua execução é congelada naquela linha até que `imprimir_flow(i - 1)` termine.
 
-Vamos fazer uma analogia para a ordem do começo e saída da chamada das funções com as bonecas russas.
-
-![bonecas_russas](https://lh3.googleusercontent.com/proxy/6ziccRgpN2P_Vb4RPQPt446NJ-nWO-fCT_W4hKpU7WQ1aZZiGGlxFQUt3lXEBqS4yYfPdXzK0NfC3DMyz1K5DjgK7g9VigAKFxSlv0e9JUzVB-G8ijX5RBTaaFU)
-
-Essas bonecas encaixam uma dentro da outra.
+Vamos fazer uma analogia para a ordem do começo e saída da chamada das funções com as bonecas russas, que se encaixam uma dentro da outra.
 
 ![bonecas_russas2](https://miro.medium.com/max/572/1*e0n2WjlNyS5ua1YTJR3apQ.png)
 
